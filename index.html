@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Bytecomtec - Catálogo</title>
+    <title>Bytecomtec - Catálogo Integral 2026</title>
     <style>
         :root {
             --primary: #1a73e8;
@@ -11,6 +11,7 @@
             --bg: #fdfdfd;
             --text: #202124;
             --white: #ffffff;
+            --shadow: rgba(0,0,0,0.08);
         }
 
         body {
@@ -21,17 +22,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: var(--text);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- LOGO --- */
+        /* --- HEADER & LOGO --- */
         .header-logo {
             width: 100%;
             max-width: 450px;
             text-align: center;
-            padding: 5px 0 15px 0;
+            padding: 15px 0;
         }
         .header-logo img {
-            width: 35%; 
+            width: 40%; 
             height: auto;
         }
 
@@ -39,53 +42,54 @@
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             max-width: 450px;
         }
 
         .card {
             background: var(--white);
-            border-radius: 12px;
-            padding: 12px 8px;
+            border-radius: 16px;
+            padding: 18px 10px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px var(--shadow);
             cursor: pointer;
             border: 1px solid #eee;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.1s;
+            transition: transform 0.1s, background 0.2s;
         }
-        .card:active { transform: scale(0.96); background: #fafafa; }
-        .card h3 { font-size: 0.8rem; margin: 8px 0 0 0; line-height: 1.1; }
-        .icon { font-size: 24px; }
+        .card:active { transform: scale(0.96); background: #f8f9fa; }
+        .card h3 { font-size: 0.82rem; margin: 10px 0 0 0; line-height: 1.2; font-weight: 600; }
+        .icon { font-size: 26px; }
         .full-width { grid-column: span 2; }
         .highlight { background: #eff6ff; border-color: #bfdbfe; }
         .success { background: #f0fdf4; border-color: #bbf7d0; }
 
-        /* --- ESTILOS DEL MODAL (RESPONSIVO MÓVIL) --- */
+        /* --- SISTEMA DE MODALES --- */
         .modal {
             display: none;
             position: fixed;
             z-index: 1000;
             left: 0; top: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            backdrop-filter: blur(3px);
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
         }
 
         .modal-content {
             background-color: white;
-            margin: 5% auto;
+            margin: 8vh auto 0;
             padding: 20px;
-            border-radius: 20px 20px 0 0;
-            width: 90%;
+            border-radius: 24px 24px 0 0;
+            width: 92%;
             max-width: 420px;
-            height: 85vh;
+            height: 92vh;
             overflow-y: auto;
             position: relative;
+            box-sizing: border-box;
             animation: slideUp 0.3s ease-out;
         }
 
@@ -98,56 +102,40 @@
             position: sticky;
             top: 0;
             float: right;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
-            color: #aaa;
+            color: #bbb;
             cursor: pointer;
-            z-index: 10;
+            z-index: 101;
         }
 
-        /* --- FICHAS DE PRODUCTO DENTRO DEL MODAL --- */
-        .brand-block { margin-bottom: 30px; }
+        /* --- BLOQUES DE PRODUCTOS --- */
+        .brand-block { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .brand-logo-center { text-align: center; margin: 15px 0; }
-        .brand-logo-center img { height: 25px; width: auto; }
+        .brand-logo-center img { height: 22px; width: auto; opacity: 0.8; }
 
         .product-card {
             background: #fff;
-            border: 1px solid #eee;
-            border-radius: 12px;
+            border: 1px solid #f1f1f1;
+            border-radius: 14px;
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
         .product-img {
             width: 100%;
-            height: 130px;
+            height: 150px;
             object-fit: contain;
-            border-bottom: 1px solid #f0f0f0;
             margin-bottom: 10px;
+            background: #fafafa;
+            border-radius: 8px;
         }
-        .product-info h4 { margin: 5px 0; font-size: 0.95rem; color: var(--primary); }
-        .product-info ul { margin: 0; padding-left: 20px; font-size: 0.8rem; color: #555; }
+        .product-info h4 { margin: 5px 0; font-size: 0.85rem; color: var(--primary); }
+        .product-info ul { margin: 8px 0; padding-left: 18px; font-size: 0.75rem; color: #666; }
 
-        /* --- FOOTER WEB --- */
-        .web-footer {
-            width: 100%;
-            max-width: 450px;
-            margin-top: 20px;
-            padding: 15px;
-            background: linear-gradient(135deg, #1a73e8, #0d47a1);
-            border-radius: 12px;
-            color: white;
-            text-align: center;
-        }
-        .btn-web {
-            display: inline-block;
-            background: white;
-            color: #1a73e8;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.85rem;
-            margin-top: 10px;
+        .btn-close-modal {
+            width: 100%; padding: 15px; border-radius: 12px; border: none; 
+            background: #f1f3f4; font-weight: bold; margin: 20px 0 40px;
         }
     </style>
 </head>
@@ -158,435 +146,234 @@
     </div>
 
     <div class="catalog-grid">
-        <div class="card full-width highlight" onclick="openModal('modalPantallas')">
+        <div class="card full-width highlight" onclick="openModal('modalVisual')">
             <span class="icon">🖥️</span>
-            <h3>Pantallas Interactivas y Proyectores</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
+            <h3>Pantallas e Interactivas</h3>
         </div>
-
         <div class="card" onclick="openModal('modalAudio')">
             <span class="icon">📢</span>
             <h3>Audio Escolar</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
         </div>
-
         <div class="card" onclick="openModal('modalRedes')">
             <span class="icon">🌐</span>
             <h3>Redes y Wi-Fi</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
         </div>
-
-        <div class="card" onclick="openModal('modalComputo')">
-            <span class="icon">💻</span>
-            <h3>Cómputo y Smart TVs</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
-        </div>
-
-        <div class="card" onclick="openModal('modalConmutadores')">
-            <span class="icon">📞</span>
-            <h3>Conmutadores</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
-        </div>
-
         <div class="card" onclick="openModal('modalCCTV')">
             <span class="icon">🛡️</span>
-            <h3>Videovigilancia (CCTV)</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
+            <h3>CCTV y Seguridad</h3>
         </div>
-
         <div class="card" onclick="openModal('modalAcceso')">
             <span class="icon">🔑</span>
             <h3>Control de Acceso</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
         </div>
-
+        <div class="card" onclick="openModal('modalComputo')">
+            <span class="icon">💻</span>
+            <h3>Cómputo y Smart TVs</h3>
+        </div>
+        <div class="card" onclick="openModal('modalConmutadores')">
+            <span class="icon">📞</span>
+            <h3>Conmutadores</h3>
+        </div>
         <div class="card full-width success" onclick="openModal('modalSoporte')">
             <span class="icon">🛠️</span>
-            <h3>Soporte y Pólizas de Servicio</h3>
-            <small style="color: var(--primary); font-size: 0.75rem; margin-top: 5px;">VER MODELOS</small>
+            <h3>Pólizas de Servicio</h3>
+        </div>
+    </div>
+
+    <div id="modalVisual" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalVisual')">&times;</span>
+            <h2 style="text-align:center;">Soluciones Visuales</h2>
+            
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Huawei.png"></div>
+                <div class="product-card">
+                    <img src="IHB2-65PB.png" class="product-img">
+                    <div class="product-info"><h4>IdeaHub 65" IHB2-65PB</h4><ul><li>4K Anti-luz azul</li><li>Wi-Fi 6</li></ul></div>
+                </div>
+            </div>
+
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="HIKKVISION.png"></div>
+                <div class="product-card">
+                    <img src="DS-D5C75RB-B2L(EDLA).png" class="product-img">
+                    <div class="product-info"><h4>75" EDLA DS-D5C75RB</h4><ul><li>Google Play Oficial</li><li>Octa-core 8GB RAM</li></ul></div>
+                </div>
+            </div>
+
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Epson.png"></div>
+                <div class="product-card">
+                    <img src="V11H983020.png" class="product-img">
+                    <div class="product-info"><h4>Epson W49</h4><ul><li>3800 Lúmenes</li><li>Tecnología 3LCD</li></ul></div>
+                </div>
+                <div class="product-card">
+                    <img src="V11HA86020.png" class="product-img">
+                    <div class="product-info"><h4>PowerLite L210W</h4><ul><li>Láser 4500 Lúmenes</li><li>Sin cambio de lámpara</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalVisual')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalAudio" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalAudio')">&times;</span>
+            <h2 style="text-align:center;">Audio e Intercomunicación</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Epcom_Proaudio.png"></div>
+                <div class="product-card">
+                    <img src="EP206TB.png" class="product-img">
+                    <div class="product-info"><h4>Bocina Plafón EP206TB</h4><ul><li>Bluetooth 5.0</li><li>20W RMS</li></ul></div>
+                </div>
+                <div class="product-card">
+                    <img src="SF-2240UC.png" class="product-img">
+                    <div class="product-info"><h4>Amplificador SF-2240UC</h4><ul><li>240W 2 Zonas</li><li>USB/SD/FM/BT</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalAudio')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalRedes" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalRedes')">&times;</span>
+            <h2 style="text-align:center;">Infraestructura de Red</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="linkedpro.png"></div>
+                <div class="product-card">
+                    <img src="SR-1924-GN2G.png" class="product-img">
+                    <div class="product-info"><h4>Gabinete 24U SR-1924</h4><ul><li>Carga 100kg</li><li>Acero laminado</li></ul></div>
+                </div>
+            </div>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="tplink.png"></div>
+                <div class="product-card">
+                    <img src="EAP610-OUTDOOR.png" class="product-img">
+                    <div class="product-info"><h4>Outdoor AX1800 EAP610</h4><ul><li>Wi-Fi 6 Mesh</li><li>IP67 Intemperie</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalRedes')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalCCTV" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalCCTV')">&times;</span>
+            <h2 style="text-align:center;">Videovigilancia Profesional</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="HIKKVISION.png"></div>
+                <div class="product-card">
+                    <img src="DS-7208HGHI-M1.png" class="product-img">
+                    <div class="product-info"><h4>DVR 8 Canales 1080p</h4><ul><li>Detección de humanos</li><li>H.265+</li></ul></div>
+                </div>
+            </div>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="EPCOM.png"></div>
+                <div class="product-card">
+                    <img src="XP-16DC-20-4KV.png" class="product-img">
+                    <div class="product-info"><h4>Fuente de Poder 16 Canales</h4><ul><li>Filtro 4KV</li><li>Fusibles PTC Térmicos</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalCCTV')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalAcceso" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalAcceso')">&times;</span>
+            <h2 style="text-align:center;">Control de Acceso</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Zkteco.png"></div>
+                <div class="product-card">
+                    <img src="K40.png" class="product-img">
+                    <div class="product-info"><h4>Biométrico K40</h4><ul><li>Huella y Tarjeta</li><li>Batería de respaldo</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalAcceso')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalComputo" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalComputo')">&times;</span>
+            <h2 style="text-align:center;">Equipamiento Digital</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Samsung.png"></div>
+                <div class="product-card">
+                    <img src="Crystal-UHD-55.png" class="product-img">
+                    <div class="product-info"><h4>Smart TV 55" Crystal UHD</h4><ul><li>Procesador 4K</li><li>HDR10+</li></ul></div>
+                </div>
+            </div>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="HP.png"></div>
+                <div class="product-card">
+                    <img src="HP-280-G9.png" class="product-img">
+                    <div class="product-info"><h4>HP 280 G9 SFF</h4><ul><li>Core i5 12va Gen</li><li>8GB RAM / 256GB SSD</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalComputo')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalConmutadores" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalConmutadores')">&times;</span>
+            <h2 style="text-align:center;">Telefonía y Conmutación</h2>
+            <div class="brand-block">
+                <div class="brand-logo-center"><img src="Panasonic.png"></div>
+                <div class="product-card">
+                    <img src="KX-TES824.png" class="product-img">
+                    <div class="product-info"><h4>Panasonic KX-TES824</h4><ul><li>Híbrido 3 líneas / 8 ext</li><li>Expandible</li></ul></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modalConmutadores')" class="btn-close-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modalSoporte" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalSoporte')">&times;</span>
+            <h2 style="text-align:center;">Pólizas de Servicio</h2>
+            <div class="product-card" style="background: #f8fafc; border: 2px dashed #cbd5e1;">
+                <div class="product-info">
+                    <h4 style="color: #1e293b;">Mantenimiento Preventivo</h4>
+                    <p style="font-size: 0.8rem; color: #475569;">Asegure la continuidad operativa de sus sistemas de seguridad y red con nuestras pólizas semestrales y anuales.</p>
+                    <ul style="color: #475569;">
+                        <li>Limpieza de cámaras y sensores</li>
+                        <li>Revisión de cableado y fuentes</li>
+                        <li>Actualización de firmware</li>
+                        <li>Soporte técnico prioritario</li>
+                    </ul>
+                </div>
+            </div>
+            <button onclick="closeModal('modalSoporte')" class="btn-close-modal">Cerrar</button>
         </div>
     </div>
 
     <div class="web-footer">
-        <p style="margin:0; font-size: 0.9rem;">¿Desea conocer más?</p>
-        <a href="https://bytecomtec.com" class="btn-web">Ir a la Página Web</a>
+        <p style="margin:0; font-size: 0.9rem;">Ing. Pedro Martínez Alva</p>
+        <p style="margin:5px 0 15px; font-size: 0.75rem; opacity: 0.9;">Bytecomtec - Ingeniería y Seguridad</p>
+        <a href="https://bytecomtec.com" class="btn-web">Ir al sitio oficial</a>
     </div>
-
-    <p style="font-size: 0.6rem; color: #bbb; margin-top: 15px;">&copy; 2026 Bytecomtec</p>
-
-<div id="modalPantallas" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('modalPantallas')">&times;</span>
-        <h2 style="text-align:center; font-size: 1.1rem; color: #333;">Soluciones Visuales</h2>
-        
-        <div class="brand-block">
-            <div class="brand-logo-center"><img src="Huawei.png" alt="Huawei"></div>
-            <div class="product-card">
-                <img src="IHB2-65PB.png" class="product-img" alt="IHB2-65PB">
-                <div class="product-info">
-                    <h4>IHB2-65PB - Pantalla Interactiva IdeaHub 65"</h4>
-                    <ul>
-                        <li>Procesador octa-core para alto rendimiento</li>
-                        <li>Pantalla 4K con protección óptica anti-luz azul</li>
-                        <li>Marco ultrafino con laminación sin bordes visibles</li>
-                        <li>Wi-Fi 6 para transmisión 4K sin interrupciones</li>
-                        <li>Escritura ultraligera con IA y latencia de 16 ms</li>
-                        <li>Detección de escritura a mano con conversión automática</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="IHB2-75PB.png" class="product-img" alt="IHB2-75PB">
-                <div class="product-info">
-                    <h4>IHB2-75PB - Pantalla Interactiva IdeaHub 75"</h4>
-                    <ul>
-                        <li>Latencia de escritura ultrabaja de 16 ms con IA</li>
-                        <li>Pantalla 4K con protección óptica anti-luz azul</li>
-                        <li>Sistema HarmonyOS con conmutación instantánea a Windows</li>
-                        <li>Wi-Fi 6 para transmisión 4K sin interrupciones</li>
-                        <li>4 altavoces de 30 W con sonido envolvente</li>
-                        <li>Gestión remota de hasta 50,000 dispositivos con IdeaManager</li>
-                    </ul>
-                </div>
-            </div>
-        </div> <div class="brand-block">
-            <div class="brand-logo-center"><img src="HIKKVISION.png" alt="Hikvision"></div>
-            <div class="product-card">
-                <img src="DS-D5C75RB-B2L(EDLA).png" class="product-img" alt="DS-D5C75RB-B2L(EDLA)">
-                <div class="product-info">
-                    <h4>DS-D5C75RB/B2L-Pantalla Interactiva Touch de 75"</h4>
-                    <ul>
-                        <li>Resolución 4K UHD 3840x2160 con ángulo de visión 178°</li>
-                        <li>Procesador Octa-core Cortex-A76 2.4GHz + A55 1.8GHz</li>
-                        <li>Almacenamiento interno 128 GB ampliable con RAM 8 GB</li>
-                        <li>Sistema de audio 3x15W + 1x25W con cancelación de eco</li>
-                        <li>Cámara 8MP con autoenfoque y micrófonos omnidireccionales 12m</li>
-                        <li>50 puntos táctiles infrarrojos con precisión 1mm y tiempo de respuesta 2ms</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="DS-D5C65RB-A2L(EDLA).png" class="product-img" alt="DS-D5C65RB">
-                <div class="product-info">
-                    <h4>DS-D5C65RB/A2L-Pantalla Interactiva Touch de 65"</h4>
-                    <ul>
-                        <li>Resolución 3840 x 2160 UHD con ángulo visión 178°</li>
-                        <li>Procesador Quad-core Cortex-A76 2.4GHz y A55 1.8GHz</li>
-                        <li>Almacenamiento interno 128 GB ampliable</li>
-                        <li>Bocinas integradas 2x15W y 1x25W</li>
-                        <li>50 puntos táctiles multitouch</li>
-                        <li>Certificación EDLA por Google con servicios oficiales</li>
-                    </ul>
-                </div>
-            </div>
-        </div> <div class="brand-block">
-            <div class="brand-logo-center"><img src="Epson.png" alt="Epson"></div>
-            <div class="product-card">
-                <img src="V11HB51021.png" class="product-img" alt="PowerLite E24">
-                <img src="V11HB51021-B.png" class="product-img" alt="PowerLite E24">
-                <div class="product-info">
-                    <h4>PowerLite E24 / V11H983020</h4>
-                    <ul>
-                        <li>3,600 Lúmenes de brillo</li>
-                        <li>Tecnología 3LCD color real</li>
-                        <li>Conectividad HDMI®: video y audio de calidad HD con un solo cable</li>
-                        <li>Pantalla de más de 100” con calidad excepcional</li>
-                        <li>Altavoz incorporado de 5 W</li>
-                        <li>Hasta 12.000 horas en modo ECO</li>
-
-                    </ul>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="V11HB72220F.png" class="product-img" alt="PowerLite E24">
-                <img src="V11HB72220.png" class="product-img" alt="PowerLite E24">
-                <div class="product-info">
-                    <h4>Proyector Portatil Lifestudio - V11HB72220</h4>
-                    <ul>
-                        <li>700 Lúmenes</li>
-                        <li>Tecnología Sound by Bose</li>
-                        <li>Epson Projection Studio App</li>
-                        <li>Google TV</li>
-                        <li>Imágenes vibrantes de hasta 150"</li>
-                        <li>Entretenimiento al Alcance de tu Mano</li>
-
-                    </ul>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="V11H983020F.png" class="product-img" alt="Proyector 3LCD">
-                <img src="V11H983020.png" class="product-img" alt="Proyector 3LCD">
-                <div class="product-info">
-                    <h4>Proyector 3LCD - W49 - V11H983020</h4>
-                    <ul>
-                        <li>3800L WXGA 1200x800</li>
-                        <li>RJ45, HDMIx2, VGAx2, RS232x2, 3,5mm in-out, USB A y B</li>
-                        <li>Tamaño de imagen proyectable de 33" a 320</li>
-                        <li>Función de modo Eco para reducir consumo energético</li>
-                        <li>Conexiones de entrada HDMI y VGA para diversas compatibilidades</li>
-                        <li>Tecnología de proyección Poly-silicon TFT active matrix para imágenes nítidas</li>
-
-                    </ul>
-                </div>
-            </div>
-
-    </div></div>
-
-        <button onclick="closeModal('modalPantallas')" style="width:100%; padding:15px; border-radius:12px; border:none; background:#eee; font-weight:bold; cursor:pointer;">Cerrar Catálogo</button>
-    </div>
-</div>
-
-
-<div id="modalAudio" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modalAudio')">&times;</span>
-            <h2 style="text-align:center; font-size: 1.1rem; color: #333;">Audio Escolar</h2>
-            
-            <div class="brand-block">
-                <div class="brand-logo-center"><img src="Epcom_Proaudio.png" alt="Epcom"></div>
-                
-                <div class="product-card">
-                    <img src="EP206TB.png" class="product-img" alt="EP206TB">
-                    <div class="product-info">
-                        <h4>EP206TB - Bocinas de plafón 6.5"</h4>
-                        <ul>
-                            <li>Mezcla Bluetooth 5.0 con conectividad inalámbrica estable</li>
-                            <li>Altavoz coaxial 6.5' woofer y tweeter de 1'</li>
-                            <li>Potencia de 20W RMS en bocina activa y pasiva</li>
-                            <li>Rango de frecuencia 70Hz - 20kHz para audio de alta fidelidad</li>
-                            <li>Diseño sin marco (frameless) para integración discreta en techos</li>
-                        </ul>
-                    </div>
-                </div> 
-
-                <div class="product-card">
-                    <img src="SF-2240UC.png" class="product-img" alt="SF-2240UC">
-                    <div class="product-info">
-                        <h4>SF-2240UC - Amplificador Mezclador Matricial</h4>
-                        <ul>
-                            <li>Amplificador mezclador digital de 2 zonas</li>
-                            <li>240W por canal (4-16Ω/100V)</li>
-                            <li>6 entradas con control de volumen independiente</li>
-                            <li>Funciones multimedia: Bluetooth, USB, SD, FM y MP3</li>
-                            <li>4 entradas mic con alimentación fantasma</li>
-                        </ul>
-                    </div>
-                </div>                
-
-                <div class="product-card">
-                    <img src="SF-774H.png" class="product-img" alt="SF-774H">
-                    <div class="product-info">
-                        <h4>SF-774H - Altavoz de Pared de 2 vías</h4>
-                        <ul>
-                            <li>Transformador 70V/100V para mínimas pérdidas de línea</li>
-                            <li>Tomas de 2.5W, 5W, 10W y 20W ajustables</li>
-                            <li>Sensibilidad de 86 dB SPL (1W/1m)</li>
-                            <li>Respuesta de frecuencia 120-18kHz amplia</li>
-                            <li>Diseño a prueba de humedad IP54</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="EP-710K.png" class="product-img" alt="EP-710K">
-                    <div class="product-info">
-                        <h4>EP-710K - Altavoz para exterior HI-FI</h4>
-                        <ul>
-                            <li>Controlador de altavoz de dos vías 6+3 pulgadas</li>
-                            <li>Sensibilidad 99dB SPL (1W/1m) para sonido potente</li>
-                            <li>Rango de respuesta de frecuencia 90-20KHz</li>
-                            <li>Certificación IP66 para exteriores confiables</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="EP-B350DTB.png" class="product-img" alt="EP-B350DTB">
-                    <div class="product-info">
-                        <h4>EP-B350DTB - Amplificador de Audio</h4>
-                        <ul>
-                            <li>Salida de altavoz 4-16Ω y 100V con 350W RMS</li>
-                            <li>4 entradas micrófono balanceadas con conector Euroblock</li>
-                            <li>Conectividad USB, SD, FM y Bluetooth integrado</li>
-                            <li>Protección contra sobrecalentamiento, cortocircuitos y sobrecarga</li>
-                            <li>Alimentación Phantom Power 48V para micrófonos profesionales</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="SF120DTB-4WSW.png" class="product-img" alt="SF120DTB/4WSW">
-                    <div class="product-info">
-                        <h4>SF120DTB/4WSW - KIT de Amplificador de Audio</h4>
-                        <ul>
-                            <li>Amplificador 120W RMS con salida 100V/4Ω</li>
-                            <li>Módulo integrado MP3, Bluetooth, tuner y USB</li>
-                            <li>4 entradas para micrófono y 2 auxiliares</li>
-                            <li>Altavoces empotrables en pared con protección IP54</li>
-                            <li>Taps seleccionables 70/100V con potencia de 2.5W a 20W</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="EP-338.png" class="product-img" alt="EP-338">
-                    <div class="product-info">
-                        <h4>EP-338 - Micrófono | Cuello de Ganso</h4>
-                        <ul>
-                            <li>Patrón cardioide para reducir ruido ambiente</li>
-                            <li>Respuesta de frecuencia 20Hz - 18kHz para sonido claro</li>
-                            <li>Sensibilidad -40dB±2dB para captación precisa</li>
-                            <li>Alimentación phantom +48V necesaria</li>
-                            <li>Incluye cable XLR de 8 metros</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="SF120DTB-MIC.png" class="product-img" alt="SF120DTB-MIC">
-                    <div class="product-info">
-                        <h4>SF120DTB-MIC - KIT de Amplificador de 120W</h4>
-                        <ul>
-                            <li>Amplificador 120W RMS con salida 100V/4Ω</li>
-                            <li>Conectividad Bluetooth, USB, MP3 y sintonizador FM</li>
-                            <li>4 entradas de micrófono y 2 entradas auxiliares</li>
-                            <li>Frecuencia de respuesta 50Hz - 16kHz para audio claro</li>
-                            <li>Micrófono de escritorio con sensibilidad 63dB y 2 timbres</li>
-                        </ul>
-                    </div>
-                </div>
-            </div> <button onclick="closeModal('modalAudio')" style="width:100%; padding:15px; border-radius:12px; border:none; background:#eee; font-weight:bold; cursor:pointer; margin-top: 10px;">Cerrar Catálogo</button>
-        </div>
-    </div>
-
-
-<div id="modalRedes" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modalRedes')">&times;</span>
-            <h2 style="text-align:center; font-size: 1.1rem; color: #333;">Solución de Redes Cableadas y Wi-Fi</h2>
-            
-            <div class="brand-block">
-                <div class="brand-logo-center"><img src="linkedpro.png" alt="Linkedpro"></div>
-                
-                <div class="product-card">
-                    <img src="KIT-ORG-24.png" class="product-img" alt="KIT-ORG-24">
-                    <div class="product-info">
-                        <h4>KIT-ORG-24 - Kit básico organizador de redes</h4>
-                        <ul>
-                            <li>Tomacorriente de 8 conexiones para rack</li>
-                            <li>Organizador vertical de 24 unidades</li>
-                            <li>Charola sencilla para gestión de cables</li>
-                            <li>Juego de 12 tornillos y tuercas</li>
-                            <li>Incluye todos los accesorios necesarios</li>
-                        </ul>
-                    </div>
-                </div> 
-
-                <div class="product-card">
-                    <img src="SR-1924-GN2G.png" class="product-img" alt="SR-1924-GN2G">
-                    <div class="product-info">
-                        <h4>SR-1924-GN2G - Gabinete de Pared 24U</h4>
-                        <ul>
-                            <li>Laterales desmontables para acceso y mantenimiento fácil</li>
-                            <li>Capacidad de carga máxima de 100 kg</li>
-                            <li>Compatible con ventiladores de 120 x 120 mm</li>
-                            <li>Fabricado según ANSI/TIA RS-310-D</li>
-                            <li>Calibre 18, resistencia y durabilidad</li>
-                        </ul>
-                    </div>
-                </div>                
-
-                <div class="product-card">
-                    <img src="SR-1909-GFP.png" class="product-img" alt="SR-1909-GFP">
-                    <div class="product-info">
-                        <h4>Gabinete para Montaje en Pared Fijo 9 Unidades</h4>
-                        <ul>
-                            <li>Chapa de seguridad en puerta</li>
-                            <li>Laterales desmontables</li>
-                            <li>Puerta desmontable y cambio de apertura</li>
-                            <li>Preparación para 1 o 2 ventiladores simples</li>
-                            <li>Capacidad de carga de 100 kg</li>
-                            <li>Dimensiones compactas 600 x 488 x 535 mm</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div><div class="brand-block">
-                <div class="brand-logo-center"><img src="HIKKVISION.png" alt="HIKKVISION"></div>
-
-                <div class="product-card">
-                    <img src="DS-3E1518P-EI.png" class="product-img" alt="DS-3E1518P-EI">
-                    <div class="product-info">
-                        <h4>DS-3E1518P-EI - Switch Gigabit PoE+ / Administrable</h4>
-                        <ul>
-                            <li>Switch 16 puertos PoE+ 10/100/1000 Mbps</li>
-                            <li>Puerto Uplink 10/100/1000 Mbps adicional</li>
-                            <li>Puerto SFP para fibra óptica</li>
-                            <li>Modo extendido hasta 300 metros</li>
-                            <li>Capacidad PoE de 230 Watts</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="DS-XS6406-S_B.png" class="product-img" alt="DS-XS6406-S_B">
-                    <div class="product-info">
-                        <h4>DS-XS6406-S_B - Gabinete para Montaje en Pared</h4>
-                        <ul>
-                            <li>Instalación en pared o piso flexible</li>
-                            <li>Ventana de cristal templado segura</li>
-                            <li>Capacidad de 6 unidades rack</li>
-                            <li>Soporta hasta 40 kg de carga</li>
-                            <li>Diseño modular con laterales desmontables</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div><div class="brand-block">
-                <div class="brand-logo-center"><img src="tplink.png" alt="TPLINK"></div>
-
-                <div class="product-card">
-                    <img src="EAP610-OUTDOOR.png" class="product-img" alt="EAP610-OUTDOOR">
-                    <div class="product-info">
-                        <h4>EAP610-OUTDOOR - Punto de Acceso Omada Exterior-Interior</h4>
-                        <ul>
-                            <li>WiFi 6 AX1800 con tecnología OFDMA y MU-MIMO</li>
-                            <li>Doble banda simultánea 2.4 GHz y 5 GHz</li>
-                            <li>Antenas integradas 2x4 dBi y 2x5 dBi</li>
-                            <li>Carcasa exterior IP67 resistente a condiciones extremas</li>
-                            <li>Compatibilidad Mesh Omada para expansión sin cables</li>
-                            <li>Alimentación PoE+ 802.3 af/at para instalación simplificada</li>
-                        </ul>
-                    </div>
-                </div>
-
-
-            </div> <button onclick="closeModal('modalRedes')" style="width:100%; padding:15px; border-radius:12px; border:none; background:#eee; font-weight:bold; cursor:pointer; margin-top: 10px;">Cerrar Catálogo</button>
-        </div>
-    </div>
-
 
     <script>
         function openModal(id) {
-            var modal = document.getElementById(id);
+            const modal = document.getElementById(id);
             if(modal) {
                 modal.style.display = "block";
-                document.body.style.overflow = "hidden"; // Bloquea scroll fondo
-            } else {
-                alert("Contenido en desarrollo: Pronto verás más modelos aquí.");
+                document.body.style.overflow = "hidden";
             }
         }
 
         function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-            document.body.style.overflow = "auto";
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
         }
 
-        // Cerrar al tocar fuera del cuadro blanco
         window.onclick = function(event) {
             if (event.target.className === 'modal') {
                 event.target.style.display = "none";
